@@ -12,8 +12,9 @@ uint32_t stack [1024] = {
     [1023] = 2,
 };
 
+uint32_t data = 0x11223344;
+
 void doit() {
-    uint32_t data = 0x11223344;
     uint32_t *da = &data;
     /* adcseq if endianness same for inst and data (LE/BE32),
      * adceq if not (BE8)
