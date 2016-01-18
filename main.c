@@ -23,6 +23,7 @@ void doit() {
     uint32_t *ea = exec_area;
     //uint8_t d = *(uint8_t *)&data;
     asm volatile("ldrb r1,[%2]\n" /* R1 = first (as per endian) byte of data */
+#ifdef DO_SETEND_TEST
                  "cmp r1, #0x11\n"
 
                  /* R3 = data with reversed endianness */
@@ -35,6 +36,9 @@ void doit() {
                  "setend le\n"
                  "bne is_le\n"
                  "setend be\n"
+#else
+                 "ldr r3, [%2]\n"
+#endif
                  "is_le: ldr r2, [%2]\n"
 
                  "str %0, [%1]\n"
