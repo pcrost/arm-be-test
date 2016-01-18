@@ -17,3 +17,16 @@ To run:
 ./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec
 ./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel ~/arm-be-test/be8.elf -nographic -d in_asm,cpu,int,exec
 ./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel ~/arm-be-test/le.elf -nographic -d in_asm,cpu,int,exec
+
+Expected results:
+
+The program will do few things then infinite loop. For the CPU state,
+at the time of the hang:
+
+R1 should be 0x44 for LE, 0x11 for both BE modes. (Big vs little endian byte access test)
+R2 should be 0x11223344 always. (Data word load test)
+R3 should be 0x44332211 in BE8 and LE, 0x11223344 in BE32 (setend test)
+
+For LE and BE32, there should be an adcseq instruction just before the
+infinite loop
+For BE8 this should instead be an adceq (instruction vs data endianness test)
