@@ -13,3 +13,6 @@ To run:
 ./armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be8.elf
 ./armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be32.elf
 ./arm-linux-user/qemu-arm -d in_asm,cpu,exec le.elf
+./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel be32.elf -nographic -d in_asm,cpu,int,exec
+./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec
+
