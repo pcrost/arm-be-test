@@ -1,6 +1,6 @@
 Some low-level test cases for big-endian ARM.
 
-Many ARM toolcahins are broken and don't have libs for BE, so build
+Many ARM toolchains are broken and don't have libs for BE, so build
 with no stdlib, and use just QEMUs monitor features to inspect register
 state.
 
@@ -10,13 +10,13 @@ CROSS_COMPILE=arm-linux-gnueabi- ./do_builds
 
 To run:
 
-./armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be8.elf
-./armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be32.elf
-./arm-linux-user/qemu-arm -d in_asm,cpu,exec le.elf
-./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel be32.elf -nographic -d in_asm,cpu,int,exec
-./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec
-./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel be8.elf -nographic -d in_asm,cpu,int,exec
-./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel le.elf -nographic -d in_asm,cpu,int,exec
+armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be8.elf
+armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be32.elf
+arm-linux-user/qemu-arm -d in_asm,cpu,exec le.elf
+arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel be32.elf -nographic -d in_asm,cpu,int,exec
+arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec
+arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel be8.elf -nographic -d in_asm,cpu,int,exec
+arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel le.elf -nographic -d in_asm,cpu,int,exec
 
 Expected results:
 
