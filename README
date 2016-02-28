@@ -1,4 +1,4 @@
-Builds out some low-level test cases for big-endian ARM.
+Some low-level test cases for big-endian ARM.
 
 Many ARM toolcahins are broken and don't have libs for BE, so build
 with no stdlib, and use just QEMUs monitor features to inspect register
