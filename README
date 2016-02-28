@@ -15,8 +15,8 @@ To run:
 ./arm-linux-user/qemu-arm -d in_asm,cpu,exec le.elf
 ./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel be32.elf -nographic -d in_asm,cpu,int,exec
 ./arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec
-./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel ~/arm-be-test/be8.elf -nographic -d in_asm,cpu,int,exec
-./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel ~/arm-be-test/le.elf -nographic -d in_asm,cpu,int,exec
+./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel be8.elf -nographic -d in_asm,cpu,int,exec
+./arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel le.elf -nographic -d in_asm,cpu,int,exec
 
 Expected results:
 
