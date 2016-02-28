@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+
+set r1 [lindex $argv 0];
+set r2 [lindex $argv 1];
+set r3 [lindex $argv 2];
+set expinst [lindex $argv 3];
+
+set expected [ list $expinst "R01=$r1" "R02=$r2" "R03=$r3" ]
+
+foreach x $expected {
+    puts "expecting $x";
+    expect {
+        eof { exit 2 }
+        "$x"
+    }
+}

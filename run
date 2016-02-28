@@ -1,0 +1,49 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+function do_test {
+    R1="11"
+    if [ "${1}" == "LE" ]; then
+        R1="44"
+    fi
+    R1="000000${R1}"
+
+    R2="11223344"
+
+    R3="44332211"
+    if [ "${1}" == "BE32" ]; then
+        R3="11223344"
+    fi
+
+    EXP_INST="adcseq"
+    if [ "${1}" == "BE8" ]; then
+        EXP_INST="adceq"
+    fi
+
+    LOG="${LOG_DIR}/$(basename $(echo ${3} | sed "s/ .*$//"))-${1}"
+
+    if [ "${2}" == "y" ]; then
+        ${3} 2>&1 | head --lines=200 > ${LOG} &
+        sleep 3
+        pkill -P $$
+    else
+        ${3} 2>&1 | head --lines=200 > ${LOG}
+    fi
+
+    cat ${LOG} | ${DIR}/run1 $R1 $R2 $R3 $EXP_INST
+    RESULT=$?
+    echo "TEST result: $RESULT (log@ $LOG)"
+}
+
+LOG_DIR=logs
+mkdir -p ${LOG_DIR}
+
+do_test "BE8"  "n" "${QEMU}/armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be8.elf"
+do_test "BE32" "n" "${QEMU}/armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be32.elf"
+do_test "LE"   "n" "${QEMU}/arm-linux-user/qemu-arm -d in_asm,cpu,exec le.elf"
+
+do_test "BE32" "y" "${QEMU}/arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel be32.elf -display none -d in_asm,cpu,int,exec"
+do_test "LE" "y"  "${QEMU}/arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec"
+do_test "BE8" "y" "${QEMU}/arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel be8.elf -nographic -d in_asm,cpu,int,exec"
+do_test "LE" "y"  "${QEMU}/arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel le.elf -nographic -d in_asm,cpu,int,exec"
