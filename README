@@ -6,7 +6,7 @@ state.
 
 To build:
 
-CROSS_COMPILE=arm-linux-gnueabi- ./do_builds
+CROSS_COMPILE=arm-linux-gnueabi- ./do-builds
 
 To run:
 
