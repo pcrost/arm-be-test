@@ -25,7 +25,7 @@ at the time of the hang:
 
 R1 should be 0x44 for LE, 0x11 for both BE modes. (Big vs little endian byte access test)
 R2 should be 0x11223344 always. (Data word load test)
-R3 should be 0x44332211 in BE8 and LE, 0x11223344 in BE32 (setend test)
+R3 should be 0x44332211 always. (setend test)
 
 For LE and BE32, there should be an adcseq instruction just before the
 infinite loop

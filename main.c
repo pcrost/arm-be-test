@@ -38,6 +38,7 @@ void doit() {
                  "setend be\n"
 #else
                  "ldr r3, [%2]\n"
+                 "rev r3, r3\n"
 #endif
                  "is_le: ldr r2, [%2]\n"
 

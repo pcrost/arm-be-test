@@ -10,11 +10,7 @@ function do_test {
     R1="000000${R1}"
 
     R2="11223344"
-
     R3="44332211"
-    if [ "${1}" == "BE32" ]; then
-        R3="11223344"
-    fi
 
     EXP_INST="adcseq"
     if [ "${1}" == "BE8" ]; then
