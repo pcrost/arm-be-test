@@ -17,7 +17,7 @@ function do_test {
         EXP_INST="adceq"
     fi
 
-    LOG="${LOG_DIR}/$(basename $(echo ${3} | sed "s/ .*$//"))-${1}"
+    LOG="${LOG_DIR}/$(basename $(echo ${3} | sed "s/ .*$//"))-${1}-${4}"
 
     if [ "${2}" == "y" ]; then
         ${3} 2>&1 | head --lines=200 > ${LOG} &
@@ -36,10 +36,14 @@ LOG_DIR=logs
 mkdir -p ${LOG_DIR}
 
 do_test "BE8"  "n" "${QEMU}/armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be8.elf"
+do_test "BE8"  "n" "${QEMU}/armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be8-se.elf" "se"
 do_test "BE32" "n" "${QEMU}/armeb-linux-user/qemu-armeb -d in_asm,cpu,exec be32.elf"
 do_test "LE"   "n" "${QEMU}/arm-linux-user/qemu-arm -d in_asm,cpu,exec le.elf"
+do_test "LE"   "n" "${QEMU}/arm-linux-user/qemu-arm -d in_asm,cpu,exec le-se.elf" "se"
 
 do_test "BE32" "y" "${QEMU}/arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel be32.elf -display none -d in_asm,cpu,int,exec"
 do_test "LE" "y"  "${QEMU}/arm-softmmu/qemu-system-arm -M realview-eb-mpcore -kernel le.elf -nographic -d in_asm,cpu,int,exec"
 do_test "BE8" "y" "${QEMU}/arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel be8.elf -nographic -d in_asm,cpu,int,exec"
+do_test "BE8" "y" "${QEMU}/arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel be8-se.elf -nographic -d in_asm,cpu,int,exec" "se"
 do_test "LE" "y"  "${QEMU}/arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel le.elf -nographic -d in_asm,cpu,int,exec"
+do_test "LE" "y"  "${QEMU}/arm-softmmu/qemu-system-arm -M xilinx-zynq-a9 -kernel le-se.elf -nographic -d in_asm,cpu,int,exec" "se"

@@ -1,6 +1,8 @@
 #!/bin/bash
 
 COMMON="${CROSS_COMPILE}gcc main.c -nostdlib"
-${COMMON} -o le.elf -march=armv6 -mlittle-endian -DDO_SETEND_TEST
-${COMMON} -o be8.elf -march=armv7-a -mbig-endian -DDO_SETEND_TEST
+${COMMON} -o le-se.elf -march=armv6 -mlittle-endian -DDO_SETEND_TEST
+${COMMON} -o be8-se.elf -march=armv7-a -mbig-endian -DDO_SETEND_TEST
+${COMMON} -o le.elf -march=armv6 -mlittle-endian
+${COMMON} -o be8.elf -march=armv7-a -mbig-endian
 ${COMMON} -o be32.elf -march=armv6 -mbig-endian
